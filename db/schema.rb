@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160130222536) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -29,8 +32,8 @@ ActiveRecord::Schema.define(version: 20160130222536) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "brokers", force: :cascade do |t|
     t.string   "name"
@@ -50,8 +53,8 @@ ActiveRecord::Schema.define(version: 20160130222536) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "brokers", ["email"], name: "index_brokers_on_email", unique: true
-  add_index "brokers", ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true
+  add_index "brokers", ["email"], name: "index_brokers_on_email", unique: true, using: :btree
+  add_index "brokers", ["reset_password_token"], name: "index_brokers_on_reset_password_token", unique: true, using: :btree
 
   create_table "brokers_campaigns", force: :cascade do |t|
     t.integer  "broker_id"
@@ -127,10 +130,10 @@ ActiveRecord::Schema.define(version: 20160130222536) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
-    t.text     "domains",     default: "--- []\n"
-    t.boolean  "css",         default: false
-    t.text     "js",          default: "--- []\n"
-    t.text     "locales",     default: "--- []\n"
+    t.text     "domains",     default: [], array: true
+    t.boolean  "css",         default: [], array: true
+    t.text     "js",          default: [], array: true
+    t.text     "locales",     default: [], array: true
     t.integer  "campaign_id"
     t.string   "slug"
     t.datetime "created_at"
