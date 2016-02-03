@@ -1,6 +1,7 @@
 RailsAdmin.config do |config|
 
   config.main_app_name = ["The Application", "BackOffice"]
+  config.root_to = 'admin/dashboard#index'
   ### Popular gems integration
 
   ## == Devise ==
