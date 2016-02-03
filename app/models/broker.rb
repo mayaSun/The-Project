@@ -48,7 +48,7 @@ class Broker <ActiveRecord::Base
     end
 
     edit do
-      fields :name, :email, :leads_per_day, :countries
+      fields :name, :email, :password, :leads_per_day, :countries
     end
 
     show do
