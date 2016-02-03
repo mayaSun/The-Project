@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_admin'
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'faker'
 
 group :development do
   gem 'web-console', '~> 2.0'
@@ -23,7 +24,6 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails'
-  gem 'faker'
 end
 
 
