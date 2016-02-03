@@ -1,0 +1,5 @@
+Fabricator(:broker) do
+  name { Faker::Name.name  }
+  email { Faker::Internet.email }
+  password { Faker::Internet.password(8, 20) } 
+end
