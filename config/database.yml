@@ -1,17 +1,17 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: myapp_dev
+  database: the_project_dev
   host: localhost
   pool: 5
-  username: <%= ENV['DB_USER_NAME'] %>
-  password: <%= ENV['DB_USER_PASSWORD'] %>
+  username: maya
+  password: bbjbjn
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: myapp_test
+  database: the_project_test
   host: localhost
   pool: 5
-  username: <%= ENV['DB_USER_NAME'] %>
-  password: <%= ENV['DB_USER_PASSWORD'] %>
+  username: maya
+  password: bbjbjn
