@@ -23,9 +23,9 @@ Language.create(name: 'Arabic')
 Language.create(name: 'Spanish')
 Language.create(name: 'Franch')
 
-Site.create(name: 'The Forex Site')
-Site.create(name: 'Make Money')
-Site.create(name: 'Master Forex')
+Site.create(name: 'The Forex Site', url: 'https://www.optionrally.com/')
+Site.create(name: 'Make Money', url: 'https://www.optionrally.com/')
+Site.create(name: 'Master Forex', url: 'https://www.optionrally.com/')
 
 
 Broker.create(name: 'Avi Shlomo', email: 'avi@gmail.com', password: 'thebroker', leads_per_day: 50, :country_ids => [1,2], :lead_ids => [])

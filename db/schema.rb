@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20160130222536) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
+    t.string   "url"
     t.text     "domains",     default: [], array: true
     t.boolean  "css",         default: [], array: true
     t.text     "js",          default: [], array: true
