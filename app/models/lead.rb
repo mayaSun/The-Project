@@ -26,8 +26,8 @@ class Lead <ActiveRecord::Base
 
   rails_admin do
     list do
-      filters [:name, :email, :site, :language, :country]
-      fields :name, :email, :site, :language, :country
+      filters [:name, :email, :site, :language, :country, :created_at]
+      fields :name, :email, :site, :language, :country, :created_at
       field :brokers do
         label 'Brokers'
         pretty_value do
