@@ -12,7 +12,7 @@ class LeadsController <ApplicationController
       site = Site.first
     end
     xml.site { |s| s.url(site.url); s.name(site.name) }
-    render xml: xml.target!    
+    render xml: xml  
   end
 
 end
