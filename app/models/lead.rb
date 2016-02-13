@@ -15,7 +15,7 @@
 
 class Lead <ActiveRecord::Base
 
-  validates_presence_of :email, :name, :phone, :country_id
+  #validates_presence_of :email, :name, :phone, :country_id
 
   has_many :brokers_leads
   has_many :brokers , through: :brokers_leads
