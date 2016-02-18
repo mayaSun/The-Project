@@ -6,7 +6,10 @@ class LeadsController <ApplicationController
   def create
     xml = Builder::XmlMarkup.new(:indent => 2)
     xml.instruct!(:xml, :version=>"1.0", :encoding => "UTF-8", :standalone => "yes")
-    if Lead.create(name: params[:name], email: params[:email], phone: params[:phone], country_id: 1)
+    unless country = Country.find_by(country_code: params[:country_code])
+      country = Country.create(country_code: params[:country_code])
+    end
+    if Lead.create(name: params[:name], email: params[:email], phone: params[:phone], country_id: country.id)
       site = Site.first
     else
       site = Site.first
