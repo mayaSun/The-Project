@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160130222536) do
   end
 
   create_table "countries", force: :cascade do |t|
-    t.string  "country_code"
+    t.string  "code"
     t.string  "name"
     t.integer "rate"
   end

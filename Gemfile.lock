@@ -66,8 +66,12 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+    countries (1.2.5)
+      currencies (~> 0.4.2)
+      i18n_data (~> 0.7.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    currencies (0.4.2)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     devise (3.5.5)
@@ -92,6 +96,7 @@ GEM
       tilt
     hashdiff (0.2.3)
     i18n (0.7.0)
+    i18n_data (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -270,6 +275,7 @@ DEPENDENCIES
   capybara
   capybara-email
   coffee-rails (~> 4.1.0)
+  countries
   database_cleaner (= 1.2.0)
   devise
   fabrication

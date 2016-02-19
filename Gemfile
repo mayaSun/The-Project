@@ -13,6 +13,7 @@ gem 'rails_admin'
 gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'faker'
+gem 'countries'
 
 group :development do
   gem 'web-console', '~> 2.0'
