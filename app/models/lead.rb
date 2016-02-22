@@ -9,6 +9,7 @@
 #  site_id     :integer
 #  language_id :integer
 #  country_id  :integer
+#  password    :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -23,6 +24,30 @@ class Lead <ActiveRecord::Base
   belongs_to :site
   belongs_to :language
   belongs_to :country
+
+  def first_name
+    if name.split.count > 1
+      name.split[0..-2].join(' ')
+    else
+      name
+    end
+  end
+
+  def last_name
+    if name.split.count > 1
+      name.split.last
+    else
+      name
+    end
+  end
+
+  def analyze_ctoption_response(res_body)
+    arr = res_body.split(/\W+/)
+    if arr[arr.index("Code") + 1] == '0'
+      self.password = arr[arr.index("Password") + 1]
+      self.save
+    end
+  end
 
   rails_admin do
     list do

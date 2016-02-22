@@ -7,6 +7,7 @@ class CreateLeads < ActiveRecord::Migration
       t.integer :site_id
       t.integer :country_id
       t.integer :language_id
+      t.string :password
       t.timestamps
     end
   end

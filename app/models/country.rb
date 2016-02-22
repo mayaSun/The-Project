@@ -2,10 +2,11 @@
 #
 # Table name: countries
 #
-#  id           :integer          not null, primary key
-#  name         :
-#  code :string
-#  rate         :string
+#  id                 :integer          not null, primary key
+#  name               :string
+#  code               :string
+#  phone_country_code :string
+#  rate               :string
 # 
 
 class Country <ActiveRecord::Base
@@ -17,19 +18,22 @@ class Country <ActiveRecord::Base
 
   has_many :leads
 
-  before_save :set_country_name
+  before_save :set_country_attributes
 
-  def set_country_name
+  def set_country_attributes
     country = ISO3166::Country.new(self.code)
-    self.name = country.name unless country.nil?
+    unless country.nil?
+      self.name = country.name 
+      self.phone_country_code = country.country_code
+    end
   end
 
   c = ISO3166::Country.new('US')
 
   rails_admin do
     list do
-      filters [:name, :code, :rate]
-      fields :name, :code, :rate
+      filters [:name, :code, :phone_country_code, :rate]
+      fields :name, :code, :phone_country_code, :rate
       field :brokers do
         label 'Brokers'
         pretty_value do
@@ -39,11 +43,11 @@ class Country <ActiveRecord::Base
     end
 
     edit do
-      fields :name, :code, :rate
+      fields :name, :code, :rate, :phone_country_code
     end
 
     show do
-      fields :name, :code, :rate
+      fields :name, :code, :rate, :phone_country_code
     end
   end
 end

@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160130222536) do
   create_table "countries", force: :cascade do |t|
     t.string  "code"
     t.string  "name"
+    t.string  "phone_country_code"
     t.integer "rate"
   end
 
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 20160130222536) do
     t.integer  "site_id"
     t.integer  "country_id"
     t.integer  "language_id"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
