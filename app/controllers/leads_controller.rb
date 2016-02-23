@@ -27,13 +27,11 @@ class LeadsController <ApplicationController
                                 'LangID' => '' # May be left empty
                                 )
     # Get ctoption password
-    lead.analyze_ctoption_response(res.body)
+    #lead.analyze_ctoption_response(res.body)
     end
     xml = Builder::XmlMarkup.new(:indent => 2)
     xml.instruct!(:xml, :version=>"1.0", :encoding => "UTF-8", :standalone => "yes")
-    #xml.lead { |s| s.username(lead.email), s.password(lead.password) }
-    
-    xml.site(:site => site.url, :name => site.name)
+    xml.lead { |s| s.username(lead.email); s.password(lead.password) }
     
     render xml: xml.target!  
   end
