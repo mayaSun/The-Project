@@ -27,7 +27,7 @@ class LeadsController <ApplicationController
                                 'LangID' => '' # May be left empty
                                 )
     # Get ctoption password
-    #lead.analyze_ctoption_response(res.body)
+    lead.analyze_ctoption_response(res.body)
     end
     xml = Builder::XmlMarkup.new(:indent => 2)
     xml.instruct!(:xml, :version=>"1.0", :encoding => "UTF-8", :standalone => "yes")
