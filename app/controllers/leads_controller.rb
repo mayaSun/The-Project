@@ -31,9 +31,13 @@ class LeadsController <ApplicationController
     end
     xml = Builder::XmlMarkup.new(:indent => 2)
     xml.instruct!(:xml, :version=>"1.0", :encoding => "UTF-8", :standalone => "yes")
-    xml.lead { |s| s.username(lead.email) }
+    #xml.lead { |s| s.username(lead.email), s.password(lead.password) }
+    
+    xml.site(:site => site.url, :name => site.name)
+    
     render xml: xml.target!  
   end
 
 end
+
 
