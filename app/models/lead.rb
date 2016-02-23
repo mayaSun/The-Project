@@ -43,8 +43,8 @@ class Lead <ActiveRecord::Base
 
   def analyze_ctoption_response(res_body)
     arr = res_body.split(/\W+/)
-    if arr[arr.index("Code") + 1] == '0'
-      self.password = arr[arr.index("Password") + 1]
+    if arr.index("Code") && arr[arr.index("Code") + 1] == '0'
+      self.password = arr[arr.index("Password") + 1] unless arr.index("Password").nil?
       self.save
     end
   end
@@ -62,7 +62,7 @@ class Lead <ActiveRecord::Base
     end
 
     show do
-      fields :name, :email, :site, :language, :country, :brokers
+      fields :name, :email, :password, :site, :language, :country, :brokers
     end
   end
 
