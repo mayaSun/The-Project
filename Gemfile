@@ -14,6 +14,7 @@ gem 'devise'
 gem 'cancancan', '~> 1.10'
 gem 'faker'
 gem 'countries'
+gem 'rails-html-sanitizer'
 
 group :development do
   gem 'web-console', '~> 2.0'

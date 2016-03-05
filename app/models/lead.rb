@@ -49,6 +49,10 @@ class Lead <ActiveRecord::Base
     end
   end
 
+  def build_cpoption_welcome_url
+    "https://ctoption.com/alogin.aspx?username=#{email}&password=#{password}&url=/en/my-account/welcome-greetings.aspx"
+  end
+
   rails_admin do
     list do
       filters [:name, :email, :site, :language, :country, :created_at]
