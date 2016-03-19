@@ -1,6 +1,6 @@
 RailsAdmin.config do |config|
 
-  config.main_app_name = ["The Application", "BackOffice"]
+  config.main_app_name = ['The Application', 'BackOffice']
   ### Popular gems integration
 
   ## == Devise ==
@@ -15,8 +15,7 @@ RailsAdmin.config do |config|
 
   # Exclude specific models (keep the others):
   # config.excluded_models = ['Admin', 'User']
-  config.excluded_models = ['Admin','BrokersCampaign', 'BrokersCountry', 'BrokersLanguage','BrokersLead','LanguagesSite']
-
+  config.included_models = ['Lead', 'Broker', 'BrokersLead', 'Site', 'Country', 'Language']
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
   PROTECTED_MODELS = []
@@ -64,4 +63,30 @@ RailsAdmin.config do |config|
       end
     end
   end unless 'test' == Rails.env
+
+  config.model 'Lead' do
+    weight 0
+  end
+
+  config.model 'BrokersLead' do
+    parent Lead
+    label 'Brokers Leads' 
+  end
+
+  config.model 'Broker' do
+    weight 1
+  end
+
+  config.model 'Site' do
+    weight 2
+  end
+
+  config.model 'Country' do
+    weight 3
+  end
+
+  config.model 'Language' do
+    weight 4
+  end
+  
 end

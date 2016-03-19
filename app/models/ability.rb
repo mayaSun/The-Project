@@ -27,12 +27,14 @@ class Ability
       can :manage, Site
       can :manage, Language
       can :manage, Lead
+      can :manage, BrokersLead
     else
       can :read, Country
       can :read, Lead
       can :read, Site
       can :read, Language
       can :read, Lead
+      can :read, BrokersLead
     end
     
     

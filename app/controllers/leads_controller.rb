@@ -34,7 +34,7 @@ class LeadsController <ApplicationController
                                 'Campaign' => '', # If no GEOIP information is available, copy the CountryCode value.
                                 'LangID' => '' # May be left empty
                                 )
-      # Get ctoption password
+      Get ctoption password
       lead.analyze_ctoption_response(res.body)
     end
     url = lead.build_cpoption_welcome_url

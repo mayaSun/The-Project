@@ -2,21 +2,22 @@
 #
 # Table name: leads
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  email       :string
-#  phone       :string
-#  site_id     :integer
-#  language_id :integer
-#  country_id  :integer
-#  password    :string
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                :integer          not null, primary key
+#  name              :string
+#  email             :string
+#  phone             :string
+#  site_id           :integer
+#  language_id       :integer
+#  country_id        :integer
+#  ctoption_password :string
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class Lead <ActiveRecord::Base
 
-  validates_presence_of :email, :name, :phone, :country_id
+  validates_presence_of :email, :phone
+  validates_uniqueness_of :email
 
   has_many :brokers_leads
   has_many :brokers , through: :brokers_leads
@@ -24,6 +25,14 @@ class Lead <ActiveRecord::Base
   belongs_to :site
   belongs_to :language
   belongs_to :country
+
+  before_save :set_name_if_not_exist
+
+  def set_name_if_not_exist
+    if name.nil? || name.empty?
+      self.name = email.split('@').first
+    end
+  end
 
   def first_name
     if name.split.count > 1
@@ -53,20 +62,47 @@ class Lead <ActiveRecord::Base
     "https://ctoption.com/alogin.aspx?username=#{email}&password=#{password}&url=/en/my-account/welcome-greetings.aspx"
   end
 
+
+  def self.create_leads_from_exhel_file(file_name, from=nil)
+
+    begin
+      xlsx = Roo::Spreadsheet.open(file_name, extension: :xlsx)
+    rescue Zip::Error
+      xlsx = Roo::Spreadsheet.open(file_name)
+    end
+
+    failed_ids = []
+    (0..xlsx.sheet(0).last_row).each do |i|
+      puts "line: " + i.to_s
+      row = xlsx.sheet(0).row(i)
+      country_name = row[2].nil? ? nil : row[2].strip.gsub(/[^\w\s]/, '')
+      country = Country.find_by(name: country_name) || Country.create(name: country_name)
+        
+      lead = Lead.create(from_db: from, country_id: country.id, name: row[1], phone: row[3], email: row[4], created_at: row[5], account_balance: row[7], currency: row[8])
+      
+      if lead.id.nil?
+        failed_ids << i
+        puts "line " + i.to_s + " lead create failed"
+      end
+    end
+    failed_ids
+  end
+
   rails_admin do
     list do
-      filters [:name, :email, :site, :language, :country, :created_at]
-      fields :name, :email, :site, :language, :country, :created_at
+      filters [:site, :country, :created_at]
+      fields :name, :email, :site, :country, :created_at
       field :brokers do
         label 'Brokers'
         pretty_value do
           bindings[:view].link_to(bindings[:object].brokers.count, nil)#admin_lead_path())
         end
       end
+      field :language
     end
 
     show do
-      fields :name, :email, :password, :site, :language, :country, :brokers
+      fields :name, :email, :ctoption_password, :site, :language, :country, :brokers
     end
   end
 

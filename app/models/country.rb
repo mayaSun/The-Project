@@ -18,11 +18,17 @@ class Country <ActiveRecord::Base
 
   has_many :leads
 
-  before_save :set_country_attributes
+  before_validation :set_country_attributes
 
   def set_country_attributes
-    country = ISO3166::Country.new(self.code)
+    country = nil
+    if !code.nil? && !code.empty?
+      country = ISO3166::Country.new(code)
+    elsif !name.nil? && !name.empty?
+      country = ISO3166::Country.find_country_by_name(name)
+    end
     unless country.nil?
+      self.code = country.alpha2 
       self.name = country.name 
       self.phone_country_code = country.country_code
     end

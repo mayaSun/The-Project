@@ -15,6 +15,8 @@ gem 'cancancan', '~> 1.10'
 gem 'faker'
 gem 'countries'
 gem 'rails-html-sanitizer'
+gem 'roo', '~> 2.3.2'
+gem 'roo-xls'
 
 group :development do
   gem 'web-console', '~> 2.0'

@@ -125,7 +125,10 @@ ActiveRecord::Schema.define(version: 20160130222536) do
     t.integer  "site_id"
     t.integer  "country_id"
     t.integer  "language_id"
-    t.string   "password"
+    t.string   "ctoption_password"
+    t.integer  "account_balance"
+    t.string   "currency"
+    t.string   "from_db"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -133,10 +136,6 @@ ActiveRecord::Schema.define(version: 20160130222536) do
   create_table "sites", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
-    t.text     "domains",     default: [], array: true
-    t.boolean  "css",         default: [], array: true
-    t.text     "js",          default: [], array: true
-    t.text     "locales",     default: [], array: true
     t.integer  "campaign_id"
     t.string   "slug"
     t.datetime "created_at"

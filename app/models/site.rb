@@ -4,10 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string
-#  domains     :text             default: "--- []\n"
-#  css         :boolean          default: false
-#  js          :text             default: "--- []\n"
-#  locales     :text             default: "--- []\n"
+#  url         :string
 #  campaign_id :integer
 #  slug        :string
 #  created_at  :datetime
@@ -39,11 +36,11 @@ class Site <ActiveRecord::Base
     end
 
     edit do
-      fields :name, :domains, :campaign, :languages
+      fields :name, :url, :campaign, :languages
     end
 
     show do
-      fields :name, :domains, :campaign, :languages
+      fields :name, :url, :campaign, :languages
     end
   end
 
